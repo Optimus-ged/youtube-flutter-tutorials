@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:landing_and_login_screen/contants/app_contants.dart';
+import 'package:landing_and_login_screen/pages/login_page.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -76,7 +77,18 @@ class LandingPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Expanded(child: _buildButton()),
+                  Expanded(
+                    child: _buildButton(
+                      title: "singin",
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -86,20 +98,23 @@ class LandingPage extends StatelessWidget {
     );
   }
 
-  _buildButton({String? title, Color? color}) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: color ?? Colors.transparent,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 20,
+  _buildButton({String? title, Color? color, VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: color ?? Colors.transparent,
         ),
-        child: Text(
-          title ?? "title",
-          textAlign: TextAlign.center,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 20,
+          ),
+          child: Text(
+            title ?? "title",
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );
