@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:landing_and_login_screen/pages/login_page.dart';
+import 'package:landing_and_login_screen/pages/intro.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,8 +10,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true),
-      
+      theme: ThemeData(
+        fontFamily: "Poppins",
+      ),
+      home: IntroPage(),
     );
   }
 }
