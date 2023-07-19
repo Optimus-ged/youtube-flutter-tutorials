@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true, fontFamily: "Poppins"),
       home: const LandingPage(),
+      //
     );
   }
 }
