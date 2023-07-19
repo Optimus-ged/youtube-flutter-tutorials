@@ -11,27 +11,24 @@ class IntroPage extends StatefulWidget {
 class _IntroPageState extends State<IntroPage> {
   List<IntroPageModel> introPages = [
     IntroPageModel(
-      imagePath: "assets/images/search.png",
-      title: "Apartment search",
-      description:
-          "Very convenient selection on the map with filtering for any requirements.",
-    ),
+        title: "Apartment search",
+        description:
+            "Very convenient selection on the map with filtering for any requirements.",
+        imagePath: "assets/images/search.png"),
     IntroPageModel(
-      imagePath: "assets/images/buying.png",
-      title: "Buying real estate",
-      description:
-          "We select only the best options for you in accordance with your requirements.",
-    ),
+        title: "Buying real estate",
+        description:
+            "We select only the best options for you in accordance with your requirements.",
+        imagePath: "assets/images/buying.png"),
     IntroPageModel(
-      imagePath: "assets/images/offers.png",
-      title: "Offers",
-      description:
-          "Thousands of real estate offers in your area tailored to your requirements.",
-    ),
+        title: "Offers",
+        description:
+            "Thousands of real estate offers in your area tailored to your requirements.",
+        imagePath: "assets/images/offers.png")
   ];
 
   late int indexValue;
-  PageController pageviewController = PageController();
+  PageController pageController = PageController();
 
   @override
   void initState() {
@@ -54,18 +51,21 @@ class _IntroPageState extends State<IntroPage> {
                   Expanded(
                     child: SizedBox(
                       height: 20,
+                      // color: Colors.green,
                       child: Row(
                         children: List.generate(
                           3,
                           (index) => AnimatedContainer(
-                            duration: const Duration(milliseconds: 300),
-                            margin: const EdgeInsets.only(right: 5),
+                            duration: const Duration(
+                              milliseconds: 300,
+                            ),
                             height: 10,
                             width: index == indexValue ? 60 : 20,
+                            margin: const EdgeInsets.only(right: 5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: index == indexValue
-                                  ? const Color(0xFFDE923C)
+                                  ? const Color(0XFFDE923C)
                                   : Colors.grey[300],
                             ),
                           ),
@@ -86,21 +86,19 @@ class _IntroPageState extends State<IntroPage> {
               // centered area
               Expanded(
                 child: PageView.builder(
-                  controller: pageviewController,
+                  controller: pageController,
                   onPageChanged: (value) {
                     setState(() {
                       indexValue = value;
                     });
                   },
                   itemCount: introPages.length,
-                  itemBuilder: (context, index) {
-                    return _customPageviewItem(
-                      context,
-                      imagePath: "${introPages[index].imagePath}",
-                      title: "${introPages[index].title}",
-                      description: "${introPages[index].description}",
-                    );
-                  },
+                  itemBuilder: (context, index) => _customPageviewItem(
+                    context,
+                    title: "${introPages[index].title}",
+                    description: "${introPages[index].description}",
+                    imagePath: "${introPages[index].imagePath}",
+                  ),
                 ),
               ),
 
@@ -113,7 +111,7 @@ class _IntroPageState extends State<IntroPage> {
                     GestureDetector(
                       onTap: () {
                         if (indexValue > 0) {
-                          pageviewController.previousPage(
+                          pageController.previousPage(
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.easeIn,
                           );
@@ -123,7 +121,7 @@ class _IntroPageState extends State<IntroPage> {
                         height: 80,
                         width: 80,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF12243D),
+                          color: const Color(0xFF122432),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: const Icon(
@@ -132,51 +130,33 @@ class _IntroPageState extends State<IntroPage> {
                         ),
                       ),
                     ),
-                    // if (indexValue != 0) ...[
-                    //   const Spacer(),
-                    //   Container(
-                    //     height: 80,
-                    //     width: 80,
-                    //     decoration: BoxDecoration(
-                    //       color: Colors.amber,
-                    //       borderRadius: BorderRadius.circular(20),
-                    //     ),
-                    //     child: const Icon(
-                    //       Icons.arrow_forward,
-                    //       color: Colors.white,
-                    //     ),
-                    //   )
-                    // ],
-                    // if (indexValue == 0)
                     GestureDetector(
                       onTap: () {
                         if (indexValue < 2) {
-                          pageviewController.nextPage(
+                          pageController.nextPage(
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.easeIn,
                           );
                         }
                       },
                       child: AnimatedContainer(
-                        height: 80,
                         duration: const Duration(milliseconds: 300),
+                        height: 80,
                         width: indexValue == 0
                             ? MediaQuery.of(context).size.width * .55
                             : 80,
                         alignment: Alignment.center,
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * .10),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFDE923C),
+                          color: const Color(0XFFDE923C),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: indexValue == 0
                             ? const Text(
                                 "Start",
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
                                   color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               )
                             : const Icon(
@@ -195,18 +175,15 @@ class _IntroPageState extends State<IntroPage> {
     );
   }
 
-  _customPageviewItem(
-    context, {
-    required String imagePath,
-    required String title,
-    required String description,
-  }) {
+  _customPageviewItem(context,
+      {required String title,
+      required String description,
+      required String imagePath}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           height: MediaQuery.of(context).size.height * .5,
-          // color: Colors.pink,
           child: Image.asset(imagePath),
         ),
         Text(
@@ -216,7 +193,6 @@ class _IntroPageState extends State<IntroPage> {
             fontSize: 20,
           ),
         ),
-        const SizedBox(height: 10),
         Text(
           description,
           style: const TextStyle(
