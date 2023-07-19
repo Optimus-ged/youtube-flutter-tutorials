@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:landing_and_login_screen/pages/landing_page.dart';
+import 'package:landing_and_login_screen/pages/chat_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true, fontFamily: "Poppins"),
-      home: const LandingPage(),
+      home: const ChatPage(),
       //
     );
   }
