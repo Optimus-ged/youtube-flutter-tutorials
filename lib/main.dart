@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:landing_and_login_screen/pages/chat_page.dart';
+
+import 'pages/chat_page.dart';
 
 void main() {
   runApp(const MyApp());

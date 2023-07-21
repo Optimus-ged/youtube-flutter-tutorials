@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'conversation_page.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key});
@@ -38,7 +39,7 @@ class ChatPage extends StatelessWidget {
                   ),
                   child: ListView.builder(
                     padding: const EdgeInsets.only(bottom: 100),
-                    itemCount: 10,
+                    itemCount: 4,
                     itemBuilder: (context, index) {
                       if (index == 0) {
                         return ClipRRect(
@@ -59,14 +60,36 @@ class ChatPage extends StatelessWidget {
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
                                       children: List.generate(
-                                        20,
-                                        (index) => const Padding(
-                                          padding: EdgeInsets.only(right: 10),
-                                          child: CircleAvatar(
-                                            radius: 40,
-                                            child: Icon(Icons.face),
-                                          ),
-                                        ),
+                                        10,
+                                        (index) {
+                                          if (index == 0) {
+                                            return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 10),
+                                              child: CircleAvatar(
+                                                radius: 35,
+                                                backgroundColor:
+                                                    Colors.grey[300]!,
+                                                child: const Text(
+                                                  "+",
+                                                  style: TextStyle(
+                                                    fontSize: 40,
+                                                    color: Colors.black54,
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          return const Padding(
+                                            padding: EdgeInsets.only(right: 10),
+                                            child: CircleAvatar(
+                                              radius: 35,
+                                              backgroundImage: AssetImage(
+                                                "assets/images/yala.jpg",
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
                                   ),
@@ -110,25 +133,41 @@ class ChatPage extends StatelessWidget {
                           ),
                         );
                       }
-                      return const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: SizedBox(
-                          height: 100,
-                          child: Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 40,
-                                child: Icon(Icons.face),
-                              ),
-                              SizedBox(width: 10),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("Yala Kuhanda"),
-                                  Text("+243971945367")
-                                ],
-                              )
-                            ],
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const ConversationPage(),
+                            ),
+                          );
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: SizedBox(
+                            height: 100,
+                            child: Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 35,
+                                  backgroundImage: AssetImage(
+                                    "assets/images/yala.jpg",
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Yala Kuhanda",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text("How are you ?")
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       );
