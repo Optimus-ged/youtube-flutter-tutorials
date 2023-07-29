@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'pages/chat_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,9 +10,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true, fontFamily: "Poppins"),
+      theme: ThemeData(fontFamily: "Poppins", useMaterial3: true),
       home: const ChatPage(),
-      //
     );
   }
 }
