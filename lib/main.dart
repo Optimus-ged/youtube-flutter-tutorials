@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'pages/chat_page.dart';
-
 
 
 void main() => runApp(const MyApp());
@@ -12,8 +10,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: "Poppins", useMaterial3: true),
-      home: const ChatPage(),
+      theme: ThemeData(
+        fontFamily: "Poppins",
+        useMaterial3: true,
+      ),
     );
   }
 }
