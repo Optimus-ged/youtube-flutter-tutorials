@@ -6,7 +6,7 @@ import '../../custom_states.dart';
 
 class PostsState extends Equatable {
   final CustomAppStates? state;
-  final List<PostResponseModel>? postsData;
+  final List<PostData>? postsData;
   final String? errorMessage;
 
   const PostsState({
@@ -17,7 +17,7 @@ class PostsState extends Equatable {
 
   PostsState copyWith({
     CustomAppStates? state,
-    List<PostResponseModel>? postsData,
+    List<PostData>? postsData,
     String? errorMessage,
   }) {
     return PostsState(

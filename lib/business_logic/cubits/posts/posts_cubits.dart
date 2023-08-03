@@ -21,13 +21,14 @@ class PostsCubit extends Cubit<PostsState> {
     try {
       emit(state.copyWith(state: CustomAppStates.loading));
       final postsData = await PostsRepositories.getPostsdData();
-
-      emit(
-        state.copyWith(
-          state: CustomAppStates.success,
-          postsData: [postsData],
-        ),
-      );
+      if (postsData.isNotEmpty) {
+        emit(
+          state.copyWith(
+            state: CustomAppStates.success,
+            postsData: postsData,
+          ),
+        );
+      }
     } catch (e) {
       emit(
         state.copyWith(

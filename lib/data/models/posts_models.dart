@@ -1,12 +1,20 @@
-class PostResponseModel {
+import 'dart:convert';
+
+List<PostData> postsFromJson(String str) => List<PostData>.from(
+      jsonDecode(str).map(
+        (x) => PostData.fromJson(x),
+      ),
+    );
+
+class PostData {
   int? userId;
   int? id;
   String? title;
   String? body;
 
-  PostResponseModel({this.userId, this.id, this.title, this.body});
+  PostData({this.userId, this.id, this.title, this.body});
 
-  PostResponseModel.fromJson(Map<String, dynamic> json) {
+  PostData.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
     id = json['id'];
     title = json['title'];
