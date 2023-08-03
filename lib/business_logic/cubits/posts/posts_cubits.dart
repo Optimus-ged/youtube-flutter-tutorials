@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 
 import '../../../data/repositories/posts_repositories.dart';
 import '../../custom_states.dart';
@@ -29,14 +28,16 @@ class PostsCubit extends Cubit<PostsState> {
           ),
         );
       }
-    } catch (e) {
+    } catch (error, stacktrace) {
+      debugPrint('Main.Main ::: ERROR: $error & STACKTRACE: $stacktrace');
+
       emit(
         state.copyWith(
           state: CustomAppStates.error,
           errorMessage: "Server error",
         ),
       );
-      log("$e");
+      // print("$e");
     }
   }
 }

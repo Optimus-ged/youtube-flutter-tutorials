@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'interceptors.dart';
 
 enum HttpMethode { get, post, put, patch, delete }
 
@@ -12,10 +14,10 @@ class DioService {
       baseUrl: "https://jsonplaceholder.typicode.com/",
       connectTimeout: const Duration(minutes: 3),
       receiveTimeout: const Duration(minutes: 3),
-      validateStatus: (statusCose) => true,
-      followRedirects: false,
+      // validateStatus: (statusCose) => true,
+      // followRedirects: false,
     ),
-  );
+  )..interceptors.add(AppInterceptors());
 
   Future request(
     HttpMethode method,
@@ -48,8 +50,9 @@ class DioService {
         ),
         data: data,
       );
-
-      return result;
+      
+      
+      return jsonEncode(result.data);
     } on Exception catch (ex) {
       log("EXCEPTION ::: occured $ex");
     }

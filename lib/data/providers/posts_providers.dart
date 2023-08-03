@@ -6,6 +6,7 @@ class PostsProviders {
       HttpMethode.get,
       "/posts",
     );
+
     return rawsPosts;
   }
 }
