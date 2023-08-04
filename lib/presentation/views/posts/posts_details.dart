@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:landing_and_login_screen/data/models/posts_models.dart';
+import 'package:landing_and_login_screen/presentation/shared_widgets/item_bottom_area_widget.dart';
 
 class PostsDetailsView extends StatelessWidget {
   final PostData data;
@@ -57,14 +58,21 @@ class PostsDetailsView extends StatelessWidget {
               ),
             ),
           ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
-            child: Text(
-              "${data.body}",
-              style: const TextStyle(
-                fontSize: 20,
+          body: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(20),
+                  child: Text(
+                    "${data.body}",
+                    style: const TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
               ),
-            ),
+              BuildBtmItemArea(data: data),
+            ],
           ),
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:landing_and_login_screen/presentation/shared_widgets/item_bottom_area_widget.dart';
 import 'package:landing_and_login_screen/presentation/views/posts/posts_details.dart';
 import '../../../data/models/posts_models.dart';
 import '../../../business_logic/cubits/posts/posts_cubits.dart';
@@ -101,69 +102,53 @@ class _PostsViewState extends State<PostsView> {
       decoration: BoxDecoration(
         // color: Colors.pink.withOpacity(0.2),
         color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(
-          30,
-        ),
+        borderRadius: BorderRadius.circular(30),
       ),
       margin: const EdgeInsets.only(bottom: 10),
       // padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Text(
-                  "${data.title}",
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    height: 1.2,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 40,
-                  ),
-                ),
-                Text(
-                  "${data.body}",
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.black26,
-                  ),
-                )
-              ],
-            ),
-          ),
-          // const SizedBox(height: 20),
-          Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(30),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => PostsDetailsView(data: data),
               ),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => PostsDetailsView(data: data),
-                  ),
-                );
-              },
-              child: Container(
-                width: double.maxFinite,
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                decoration: const BoxDecoration(
-                  border: Border(
-                      top: BorderSide(
-                    width: 0.2,
-                    color: Colors.grey,
-                  )),
+            );
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    Text(
+                      "${data.title}",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        height: 1.2,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
+                      ),
+                    ),
+                    Text(
+                      "${data.body}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black26,
+                      ),
+                    )
+                  ],
                 ),
-                child: const Icon(Icons.edit),
               ),
-            ),
+              // const SizedBox(height: 20),
+              BuildBtmItemArea(data: data),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
