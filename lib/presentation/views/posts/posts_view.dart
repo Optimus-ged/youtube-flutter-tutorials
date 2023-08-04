@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:landing_and_login_screen/presentation/views/posts/posts_details.dart';
 import '../../../data/models/posts_models.dart';
 import '../../../business_logic/cubits/posts/posts_cubits.dart';
 import '../../../business_logic/custom_states.dart';
@@ -69,7 +70,7 @@ class _PostsViewState extends State<PostsView> {
                   ),
                   const SizedBox(height: 40),
                   Text(
-                    "My notes",
+                    "My posts",
                     style: TextStyle(
                       fontSize: 40,
                       color: Colors.grey[400],
@@ -84,36 +85,7 @@ class _PostsViewState extends State<PostsView> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             sliver: SliverList.builder(
               itemCount: data.length,
-              itemBuilder: (context, index) => Container(
-                decoration: BoxDecoration(
-                  color: Colors.pink.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(
-                    30,
-                  ),
-                ),
-                margin: const EdgeInsets.only(bottom: 10),
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "${data[index].title}",
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        height: 1.2,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
-                      ),
-                    ),
-                    Text(
-                      "${data[index].body}",
-                      style:
-                          const TextStyle(fontSize: 20, color: Colors.black26),
-                    ),
-                  ],
-                ),
-              ),
+              itemBuilder: (context, index) => buildPostItem(data[index]),
             ),
           )
         ],
@@ -121,6 +93,78 @@ class _PostsViewState extends State<PostsView> {
     }
     return Center(
       child: Text("${context.watch<PostsCubit>().state.errorMessage}"),
+    );
+  }
+
+  buildPostItem(PostData data) {
+    return Container(
+      decoration: BoxDecoration(
+        // color: Colors.pink.withOpacity(0.2),
+        color: Colors.grey[100],
+        borderRadius: BorderRadius.circular(
+          30,
+        ),
+      ),
+      margin: const EdgeInsets.only(bottom: 10),
+      // padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Text(
+                  "${data.title}",
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    height: 1.2,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40,
+                  ),
+                ),
+                Text(
+                  "${data.body}",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.black26,
+                  ),
+                )
+              ],
+            ),
+          ),
+          // const SizedBox(height: 20),
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
+              ),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => PostsDetailsView(data: data),
+                  ),
+                );
+              },
+              child: Container(
+                width: double.maxFinite,
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                decoration: const BoxDecoration(
+                  border: Border(
+                      top: BorderSide(
+                    width: 0.2,
+                    color: Colors.grey,
+                  )),
+                ),
+                child: const Icon(Icons.edit),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
