@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:landing_and_login_screen/data/models/posts_models.dart';
-import 'package:landing_and_login_screen/presentation/views/posts/posts_details.dart';
+
+import '../../data/models/posts_models.dart';
 
 class BuildBtmItemArea extends StatelessWidget {
   final PostData data;
-  const BuildBtmItemArea({required this.data, super.key});
+  final double radiusValue;
+  const BuildBtmItemArea({
+    required this.data,
+    this.radiusValue = 0,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +28,18 @@ class BuildBtmItemArea extends StatelessWidget {
         children: [
           buildbtn(
             icon: Icons.edit,
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(30),
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(radiusValue),
             ),
-            onTap: () {
-              
-            },
+            onTap: () {},
           ),
           buildbtn(
             icon: Icons.delete,
-            borderRadius: const BorderRadius.only(
-              bottomRight: Radius.circular(30),
+            hasBorderSide: false,
+            borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(radiusValue),
             ),
+            onTap: () {},
           ),
         ],
       ),
@@ -43,6 +48,7 @@ class BuildBtmItemArea extends StatelessWidget {
 
   buildbtn(
       {VoidCallback? onTap,
+      bool hasBorderSide = true,
       required IconData icon,
       required BorderRadius borderRadius}) {
     return Expanded(
@@ -53,11 +59,14 @@ class BuildBtmItemArea extends StatelessWidget {
           onTap: onTap,
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 15),
-            decoration: const BoxDecoration(
-              border: Border(
-                right: BorderSide(width: 0.2, color: Colors.grey),
-              ),
-            ),
+            decoration: hasBorderSide
+                ? BoxDecoration(
+                    border: Border(
+                      right: BorderSide(
+                          width: hasBorderSide ? 0.2 : 0, color: Colors.grey),
+                    ),
+                  )
+                : const BoxDecoration(),
             child: Icon(
               icon,
               color: Colors.grey[500],

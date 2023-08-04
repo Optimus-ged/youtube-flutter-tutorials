@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:landing_and_login_screen/presentation/shared_widgets/item_bottom_area_widget.dart';
-import 'package:landing_and_login_screen/presentation/views/posts/posts_details.dart';
+import '../../shared_widgets/item_bottom_area_widget.dart';
+import 'posts_details.dart';
 import '../../../data/models/posts_models.dart';
 import '../../../business_logic/cubits/posts/posts_cubits.dart';
 import '../../../business_logic/custom_states.dart';
@@ -145,7 +145,7 @@ class _PostsViewState extends State<PostsView> {
                 ),
               ),
               // const SizedBox(height: 20),
-              BuildBtmItemArea(data: data),
+              BuildBtmItemArea(data: data, radiusValue: 30,),
             ],
           ),
         ),

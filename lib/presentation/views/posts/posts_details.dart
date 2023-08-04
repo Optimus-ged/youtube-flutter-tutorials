@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:landing_and_login_screen/data/models/posts_models.dart';
-import 'package:landing_and_login_screen/presentation/shared_widgets/item_bottom_area_widget.dart';
+import '../../../data/models/posts_models.dart';
+import '../../shared_widgets/item_bottom_area_widget.dart';
 
 class PostsDetailsView extends StatelessWidget {
   final PostData data;
