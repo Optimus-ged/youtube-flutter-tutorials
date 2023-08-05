@@ -41,55 +41,58 @@ class _PostsViewState extends State<PostsView> {
     } else if (context.watch<PostsCubit>().state.state ==
         CustomAppStates.success) {
       List<PostData> data = context.watch<PostsCubit>().state.postsData!;
-      return CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: 20,
-                right: 20,
-                top: 10,
-                bottom: 40,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.search),
-                      ),
-                      const SizedBox(width: 10),
-                      CircleAvatar(
-                        radius: 22,
-                        backgroundColor: Colors.grey[100],
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 40),
-                  Text(
-                    "My posts",
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Colors.grey[400],
-                      fontWeight: FontWeight.bold,
+      return Scrollbar(
+        radius: const Radius.circular(30),
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  top: 10,
+                  bottom: 40,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.search),
+                        ),
+                        const SizedBox(width: 10),
+                        CircleAvatar(
+                          radius: 22,
+                          backgroundColor: Colors.grey[100],
+                        )
+                      ],
                     ),
-                  )
-                ],
+                    const SizedBox(height: 40),
+                    Text(
+                      "My posts",
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Colors.grey[400],
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            sliver: SliverList.builder(
-              itemCount: data.length,
-              itemBuilder: (context, index) => buildPostItem(data[index]),
-            ),
-          )
-        ],
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              sliver: SliverList.builder(
+                itemCount: data.length,
+                itemBuilder: (context, index) => buildPostItem(data[index]),
+              ),
+            )
+          ],
+        ),
       );
     }
     return Center(
@@ -145,7 +148,10 @@ class _PostsViewState extends State<PostsView> {
                 ),
               ),
               // const SizedBox(height: 20),
-              BuildBtmItemArea(data: data, radiusValue: 30,),
+              BuildBtmItemArea(
+                data: data,
+                radiusValue: 30,
+              ),
             ],
           ),
         ),

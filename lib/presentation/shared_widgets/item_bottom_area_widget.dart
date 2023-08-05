@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:landing_and_login_screen/presentation/views/posts/edit_posts_view.dart';
 
 import '../../data/models/posts_models.dart';
 
@@ -31,7 +32,13 @@ class BuildBtmItemArea extends StatelessWidget {
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(radiusValue),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const EditPostsView(),
+                ),
+              );
+            },
           ),
           buildbtn(
             icon: Icons.delete,
