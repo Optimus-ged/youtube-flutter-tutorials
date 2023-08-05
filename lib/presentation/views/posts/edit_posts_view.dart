@@ -31,6 +31,8 @@ class _EditPostsViewState extends State<EditPostsView> {
     context.read<PostsCubit>().create(data);
   }
 
+  
+
   final titleController = TextEditingController();
   final bodyController = TextEditingController();
 

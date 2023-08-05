@@ -78,12 +78,39 @@ class PostsCubit extends Cubit<PostsState> {
     }
   }
 
-  // addData(PostData data){
-  //   emit(
-  //         state.copyWith(
-  //           state: CustomAppStates.success,
-  //           postsData: state.postsData
-  //         ),
-  //       );
-  // }
+  void update(PostData data) async {
+    try {
+      emit(state.copyWith(state: CustomAppStates.loading));
+      final result = await PostsRepositories.updatePosts(data);
+      if (result.id != null) {
+        await Future.delayed(const Duration(seconds: 1));
+
+        // let's update the list by removing the previous data
+        //by this new one
+        final updatedList = state.postsData!;
+        final index = updatedList.indexOf(
+          updatedList.where((e) => e.id == result.id).first,
+        );
+        updatedList[index] = result;
+
+        // now we can emit a new state
+        emit(
+          state.copyWith(
+            state: CustomAppStates.success,
+            postData: result,
+            postsData: updatedList,
+          ),
+        );
+      }
+    } catch (error, stacktrace) {
+      debugPrint('Main.Main ::: ERROR: $error & STACKTRACE: $stacktrace');
+
+      emit(
+        state.copyWith(
+          state: CustomAppStates.error,
+          errorMessage: "Server error",
+        ),
+      );
+    }
+  }
 }

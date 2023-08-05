@@ -11,4 +11,9 @@ class PostsRepositories {
     final String rawsPosts = await PostsProviders.createPosts(data);
     return postFromJson(rawsPosts);
   }
+
+  static Future<PostData> updatePosts(PostData data) async {
+    final String rawsPosts = await PostsProviders.updatePosts(data);
+    return postFromJson(rawsPosts);
+  }
 }

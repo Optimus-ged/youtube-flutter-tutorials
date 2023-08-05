@@ -21,4 +21,14 @@ class PostsProviders {
 
     return rawsPosts;
   }
+
+  static Future<String> updatePosts(PostData data) async {
+    final String rawsPosts = await DioService().request(
+      HttpMethode.put,
+      "/posts",
+      data: data.toJson()
+    );
+
+    return rawsPosts;
+  }
 }
