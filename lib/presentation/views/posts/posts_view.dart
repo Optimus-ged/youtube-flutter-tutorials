@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'edit_posts_view.dart';
 import 'posts_details.dart';
 import '../../../data/models/posts_models.dart';
@@ -28,23 +29,26 @@ class _PostsViewState extends State<PostsView> {
         child: Scaffold(
           backgroundColor: Colors.white,
           body: buildWidget(),
-          floatingActionButton: Padding(
-            padding: const EdgeInsets.only(right: 5),
-            child: FloatingActionButton(
-              backgroundColor: Colors.amber[800],
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const EditPostsView(),
-                  ),
-                );
-              },
-              child: const Icon(
-                Icons.add,
-                color: Colors.white,
-              ),
-            ),
-          ),
+          floatingActionButton:
+              context.watch<PostsCubit>().state.state != CustomAppStates.loading
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: FloatingActionButton(
+                        backgroundColor: Colors.amber[800],
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const EditPostsView(),
+                            ),
+                          );
+                        },
+                        child: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  : const SizedBox(),
         ),
       ),
     );
@@ -52,8 +56,8 @@ class _PostsViewState extends State<PostsView> {
 
   buildWidget() {
     if (context.watch<PostsCubit>().state.state == CustomAppStates.loading) {
-      return const Center(
-        child: CircularProgressIndicator(),
+      return Center(
+        child: Lottie.asset("assets/images/loading.json"),
       );
     } else if (context.watch<PostsCubit>().state.state ==
         CustomAppStates.success) {
@@ -89,7 +93,10 @@ class _PostsViewState extends State<PostsView> {
                         CircleAvatar(
                           radius: 22,
                           backgroundColor: Colors.amber[100],
-                          child: const Icon(Icons.face),
+                          child: const Icon(
+                            Icons.face,
+                            color: Colors.grey,
+                          ),
                         )
                       ],
                     ),

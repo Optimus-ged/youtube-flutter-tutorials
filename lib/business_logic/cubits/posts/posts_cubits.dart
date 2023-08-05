@@ -21,6 +21,9 @@ class PostsCubit extends Cubit<PostsState> {
       emit(state.copyWith(state: CustomAppStates.loading));
       final postsData = await PostsRepositories.getPostsdData();
       if (postsData.isNotEmpty) {
+        await Future.delayed(
+          const Duration(seconds: 3),
+        );
         emit(
           state.copyWith(
             state: CustomAppStates.success,
