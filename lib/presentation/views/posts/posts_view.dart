@@ -174,6 +174,7 @@ class _PostsViewState extends State<PostsView> {
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "${data.title}",

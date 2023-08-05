@@ -3,7 +3,8 @@ import 'package:landing_and_login_screen/data/models/posts_models.dart';
 
 class CustomButtonWidget extends StatelessWidget {
   final PostData? data;
-  const CustomButtonWidget({this.data, super.key});
+  final VoidCallback? onTap;
+  const CustomButtonWidget({this.data, this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class CustomButtonWidget extends StatelessWidget {
       width: double.maxFinite,
       height: 60,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onTap,
         style: ButtonStyle(
           shape: MaterialStatePropertyAll(
             RoundedRectangleBorder(

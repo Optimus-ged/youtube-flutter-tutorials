@@ -1,5 +1,3 @@
-
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:landing_and_login_screen/data/models/posts_models.dart';
@@ -53,13 +51,18 @@ class PostsCubit extends Cubit<PostsState> {
       emit(state.copyWith(state: CustomAppStates.loading));
       final result = await PostsRepositories.createPosts(data);
       if (result.id != null) {
-        await Future.delayed(
-          const Duration(seconds: 3),
-        );
+        await Future.delayed(const Duration(seconds: 1));
+
+        // add the posted data to the existinf list
+        final updatedList = state.postsData!;
+        updatedList.insert(0, result);
+
+        // now we can emit a new state
         emit(
           state.copyWith(
             state: CustomAppStates.success,
             postData: result,
+            postsData: updatedList,
           ),
         );
       }
@@ -74,4 +77,13 @@ class PostsCubit extends Cubit<PostsState> {
       );
     }
   }
+
+  // addData(PostData data){
+  //   emit(
+  //         state.copyWith(
+  //           state: CustomAppStates.success,
+  //           postsData: state.postsData
+  //         ),
+  //       );
+  // }
 }
