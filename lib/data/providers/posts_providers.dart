@@ -13,20 +13,23 @@ class PostsProviders {
   }
 
   static Future<String> createPosts(PostData data) async {
-    final String rawsPosts = await DioService().request(
-      HttpMethode.post,
-      "/posts",
-      data: data.toJson()
-    );
+    final String rawsPosts = await DioService()
+        .request(HttpMethode.post, "/posts", data: data.toJson());
 
     return rawsPosts;
   }
 
   static Future<String> updatePosts(PostData data) async {
+    final String rawsPosts = await DioService()
+        .request(HttpMethode.put, "/posts/${data.id}", data: data.toJson());
+
+    return rawsPosts;
+  }
+
+  static Future<String> deletePost(int id) async {
     final String rawsPosts = await DioService().request(
-      HttpMethode.put,
-      "/posts",
-      data: data.toJson()
+      HttpMethode.delete,
+      "/posts/$id",
     );
 
     return rawsPosts;

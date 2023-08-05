@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:landing_and_login_screen/business_logic/cubits/posts/posts_cubits.dart';
-import 'package:landing_and_login_screen/business_logic/cubits/posts/posts_states.dart';
-import 'package:landing_and_login_screen/business_logic/custom_states.dart';
+import '../../../business_logic/cubits/posts/posts_cubits.dart';
+import '../../../business_logic/cubits/posts/posts_states.dart';
+import '../../../business_logic/custom_states.dart';
 import 'package:lottie/lottie.dart';
 import '../../../data/models/posts_models.dart';
 import '../../shared_widgets/custom_btn_widget.dart';
@@ -31,7 +31,21 @@ class _EditPostsViewState extends State<EditPostsView> {
     context.read<PostsCubit>().create(data);
   }
 
-  
+  updatePost() {
+    PostData data = PostData(
+      title: titleController.text.trim(),
+      body: bodyController.text.trim(),
+      userId: 1,
+      id: widget.data!.id,
+    );
+    context.read<PostsCubit>().update(data);
+  }
+
+  deletePost() {
+    if (widget.data != null) {
+      context.read<PostsCubit>().delete(int.parse("${widget.data!.id}"));
+    }
+  }
 
   final titleController = TextEditingController();
   final bodyController = TextEditingController();
@@ -56,7 +70,13 @@ class _EditPostsViewState extends State<EditPostsView> {
     return BlocListener<PostsCubit, PostsState>(
       listener: (context, state) {
         if (state.state == CustomAppStates.success) {
-          Navigator.of(context).pop();
+          if (widget.data != null) {
+            Navigator.of(context)
+              ..pop()
+              ..pop();
+          } else {
+            Navigator.of(context).pop();
+          }
         }
       },
       child: Stack(
@@ -115,9 +135,14 @@ class _EditPostsViewState extends State<EditPostsView> {
                     Padding(
                       padding: const EdgeInsets.all(20),
                       child: CustomButtonWidget(
-                        data: widget.data,
-                        onTap: () => createPost(),
-                      ),
+                          data: widget.data,
+                          onTap: () {
+                            if (widget.data != null) {
+                              updatePost();
+                            } else {
+                              createPost();
+                            }
+                          }),
                     )
                   ],
                 ),

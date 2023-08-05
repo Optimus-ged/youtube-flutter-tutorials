@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:landing_and_login_screen/business_logic/cubits/posts/posts_cubits.dart';
 
 import '../../data/models/posts_models.dart';
 import '../views/posts/edit_posts_view.dart';
@@ -45,7 +47,9 @@ class BuildBtmItemArea extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return const CustomAlertDialog();
+                  return  CustomAlertDialog(
+                    onTapDelete: () => context.read<PostsCubit>().delete(data.id!),
+                  );
                 },
               );
             },

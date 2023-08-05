@@ -16,4 +16,9 @@ class PostsRepositories {
     final String rawsPosts = await PostsProviders.updatePosts(data);
     return postFromJson(rawsPosts);
   }
+
+  static Future<PostData> deletePost(int id) async {
+    final String rawsPosts = await PostsProviders.deletePost(id);
+    return postFromJson(rawsPosts);
+  }
 }
