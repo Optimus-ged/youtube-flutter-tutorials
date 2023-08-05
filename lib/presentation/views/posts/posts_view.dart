@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:landing_and_login_screen/presentation/views/posts/search_post_view.dart';
 import 'package:lottie/lottie.dart';
 import 'edit_posts_view.dart';
 import 'posts_details.dart';
@@ -97,7 +98,13 @@ class _PostsViewState extends State<PostsView> {
                         ),
                         const SizedBox(width: 10),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const SearchPostView(),
+                              ),
+                            );
+                          },
                           icon: Icon(
                             Icons.search,
                             color: Colors.amber[800],
