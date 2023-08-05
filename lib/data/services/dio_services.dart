@@ -12,7 +12,7 @@ class DioService {
   final Dio _dio = Dio(
     BaseOptions(
       receiveDataWhenStatusError: true,
-      baseUrl: "https://jsonplaceholder.typicode.com/",
+      baseUrl: "https://jsonplaceholder.typicode.com",
       connectTimeout: const Duration(minutes: 3),
       receiveTimeout: const Duration(minutes: 3),
       // validateStatus: (statusCose) => true,

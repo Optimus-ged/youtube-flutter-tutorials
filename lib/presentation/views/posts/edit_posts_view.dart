@@ -87,9 +87,11 @@ class _EditPostsViewState extends State<EditPostsView> {
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.all(20),
-                child: CustomButtonWidget(),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: CustomButtonWidget(
+                  data: widget.data,
+                ),
               )
             ],
           ),

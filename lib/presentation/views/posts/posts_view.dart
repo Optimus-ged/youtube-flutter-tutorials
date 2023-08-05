@@ -17,7 +17,7 @@ class PostsView extends StatefulWidget {
 class _PostsViewState extends State<PostsView> {
   @override
   void initState() {
-    context.read<PostsCubit>().getPosts();
+    context.read<PostsCubit>().fetch();
     super.initState();
   }
 
@@ -29,26 +29,26 @@ class _PostsViewState extends State<PostsView> {
         child: Scaffold(
           backgroundColor: Colors.white,
           body: buildWidget(),
-          floatingActionButton:
-              context.watch<PostsCubit>().state.state != CustomAppStates.loading
-                  ? Padding(
-                      padding: const EdgeInsets.only(right: 5),
-                      child: FloatingActionButton(
-                        backgroundColor: Colors.amber[800],
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const EditPostsView(),
-                            ),
-                          );
-                        },
-                        child: const Icon(
-                          Icons.add,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  : const SizedBox(),
+          // floatingActionButton:
+          //     context.watch<PostsCubit>().state.state != CustomAppStates.loading
+          //         ? Padding(
+          //             padding: const EdgeInsets.only(right: 5),
+          //             child: FloatingActionButton(
+          //               backgroundColor: Colors.amber[800],
+          //               onPressed: () {
+          //                 Navigator.of(context).push(
+          //                   MaterialPageRoute(
+          //                     builder: (context) => const EditPostsView(),
+          //                   ),
+          //                 );
+          //               },
+          //               child: const Icon(
+          //                 Icons.add,
+          //                 color: Colors.white,
+          //               ),
+          //             ),
+          //           )
+          //         : const SizedBox(),
         ),
       ),
     );
@@ -82,6 +82,20 @@ class _PostsViewState extends State<PostsView> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const EditPostsView(),
+                              ),
+                            );
+                          },
+                          icon: Icon(
+                            Icons.add,
+                            color: Colors.amber[800],
+                          ),
+                        ),
+                        const SizedBox(width: 10),
                         IconButton(
                           onPressed: () {},
                           icon: Icon(

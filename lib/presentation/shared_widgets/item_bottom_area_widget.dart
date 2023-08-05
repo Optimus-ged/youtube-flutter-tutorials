@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../views/posts/edit_posts_view.dart';
 
 import '../../data/models/posts_models.dart';
+import '../views/posts/edit_posts_view.dart';
+import 'dialog_widget.dart';
 
 class BuildBtmItemArea extends StatelessWidget {
   final PostData data;
@@ -40,7 +41,14 @@ class BuildBtmItemArea extends StatelessWidget {
             borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(radiusValue),
             ),
-            onTap: () {},
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return const CustomAlertDialog();
+                },
+              );
+            },
           ),
         ],
       ),

@@ -6,6 +6,10 @@ List<PostData> postsFromJson(String str) => List<PostData>.from(
       ),
     );
 
+PostData postFromJson(String str) => PostData.fromJson(
+      jsonDecode(str),
+    );
+
 class PostData {
   int? userId;
   int? id;

@@ -1,5 +1,8 @@
+
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:landing_and_login_screen/data/models/posts_models.dart';
 
 import '../../../data/repositories/posts_repositories.dart';
 import '../../custom_states.dart';
@@ -12,22 +15,23 @@ class PostsCubit extends Cubit<PostsState> {
             state: CustomAppStates.initial,
             postsData: [],
             errorMessage: "",
+            postData: null,
           ),
         );
 
   // get data
-  void getPosts() async {
+  void fetch() async {
     try {
       emit(state.copyWith(state: CustomAppStates.loading));
-      final postsData = await PostsRepositories.getPostsdData();
-      if (postsData.isNotEmpty) {
+      final result = await PostsRepositories.getPosts();
+      if (result.isNotEmpty) {
         await Future.delayed(
           const Duration(seconds: 3),
         );
         emit(
           state.copyWith(
             state: CustomAppStates.success,
-            postsData: postsData,
+            postsData: result,
           ),
         );
       }
@@ -40,7 +44,34 @@ class PostsCubit extends Cubit<PostsState> {
           errorMessage: "Server error",
         ),
       );
-      // print("$e");
+    }
+  }
+
+  // create post
+  void create(PostData data) async {
+    try {
+      emit(state.copyWith(state: CustomAppStates.loading));
+      final result = await PostsRepositories.createPosts(data);
+      if (result.id != null) {
+        await Future.delayed(
+          const Duration(seconds: 3),
+        );
+        emit(
+          state.copyWith(
+            state: CustomAppStates.success,
+            postData: result,
+          ),
+        );
+      }
+    } catch (error, stacktrace) {
+      debugPrint('Main.Main ::: ERROR: $error & STACKTRACE: $stacktrace');
+
+      emit(
+        state.copyWith(
+          state: CustomAppStates.error,
+          errorMessage: "Server error",
+        ),
+      );
     }
   }
 }
