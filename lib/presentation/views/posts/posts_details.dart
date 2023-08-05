@@ -31,10 +31,13 @@ class PostsDetailsView extends StatelessWidget {
                       },
                       child: Row(
                         children: [
-                          const Icon(Icons.arrow_back),
+                          Icon(
+                            Icons.arrow_back,
+                            color: Colors.amber[500],
+                          ),
                           CircleAvatar(
                             radius: 20,
-                            backgroundColor: Colors.grey[100],
+                            backgroundColor: Colors.amber[100],
                             child: Text(
                               data.title!.substring(0, 1).toUpperCase(),
                             ),

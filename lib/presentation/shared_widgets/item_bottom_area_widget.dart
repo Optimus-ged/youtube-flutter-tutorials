@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:landing_and_login_screen/presentation/views/posts/edit_posts_view.dart';
+import '../views/posts/edit_posts_view.dart';
 
 import '../../data/models/posts_models.dart';
 
@@ -14,16 +14,8 @@ class BuildBtmItemArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.maxFinite,
-      decoration: const BoxDecoration(
-        border: Border(
-          top: BorderSide(
-            width: 0.2,
-            color: Colors.grey,
-          ),
-        ),
-      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -35,7 +27,9 @@ class BuildBtmItemArea extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const EditPostsView(),
+                  builder: (context) => EditPostsView(
+                    data: data,
+                  ),
                 ),
               );
             },
@@ -68,15 +62,18 @@ class BuildBtmItemArea extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 15),
             decoration: hasBorderSide
                 ? BoxDecoration(
+                    color: Colors.amber[100],
                     border: Border(
                       right: BorderSide(
                           width: hasBorderSide ? 0.2 : 0, color: Colors.grey),
                     ),
                   )
-                : const BoxDecoration(),
+                : BoxDecoration(
+                    color: Colors.amber[100],
+                  ),
             child: Icon(
               icon,
-              color: Colors.grey[500],
+              color: Colors.amber[800],
             ),
           ),
         ),

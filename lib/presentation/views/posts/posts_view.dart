@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../shared_widgets/item_bottom_area_widget.dart';
+import 'edit_posts_view.dart';
 import 'posts_details.dart';
 import '../../../data/models/posts_models.dart';
 import '../../../business_logic/cubits/posts/posts_cubits.dart';
@@ -28,6 +28,23 @@ class _PostsViewState extends State<PostsView> {
         child: Scaffold(
           backgroundColor: Colors.white,
           body: buildWidget(),
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.only(right: 5),
+            child: FloatingActionButton(
+              backgroundColor: Colors.amber[800],
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const EditPostsView(),
+                  ),
+                );
+              },
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -43,6 +60,7 @@ class _PostsViewState extends State<PostsView> {
       List<PostData> data = context.watch<PostsCubit>().state.postsData!;
       return Scrollbar(
         radius: const Radius.circular(30),
+        thumbVisibility: true,
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
@@ -62,21 +80,24 @@ class _PostsViewState extends State<PostsView> {
                       children: [
                         IconButton(
                           onPressed: () {},
-                          icon: const Icon(Icons.search),
+                          icon: Icon(
+                            Icons.search,
+                            color: Colors.amber[800],
+                          ),
                         ),
                         const SizedBox(width: 10),
                         CircleAvatar(
                           radius: 22,
-                          backgroundColor: Colors.grey[100],
+                          backgroundColor: Colors.amber[100],
+                          child: const Icon(Icons.face),
                         )
                       ],
                     ),
                     const SizedBox(height: 40),
-                    Text(
+                    const Text(
                       "My posts",
                       style: TextStyle(
                         fontSize: 40,
-                        color: Colors.grey[400],
                         fontWeight: FontWeight.bold,
                       ),
                     )
@@ -85,10 +106,16 @@ class _PostsViewState extends State<PostsView> {
               ),
             ),
             SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+                bottom: 100,
+              ),
               sliver: SliverList.builder(
-                itemCount: data.length,
-                itemBuilder: (context, index) => buildPostItem(data[index]),
+                itemCount: data.take(10).length,
+                itemBuilder: (context, index) => buildPostItem(
+                  data[index],
+                ),
               ),
             )
           ],
@@ -104,7 +131,7 @@ class _PostsViewState extends State<PostsView> {
     return Container(
       decoration: BoxDecoration(
         // color: Colors.pink.withOpacity(0.2),
-        color: Colors.grey[100],
+        color: Colors.amber[100],
         borderRadius: BorderRadius.circular(30),
       ),
       margin: const EdgeInsets.only(bottom: 10),
@@ -148,10 +175,10 @@ class _PostsViewState extends State<PostsView> {
                 ),
               ),
               // const SizedBox(height: 20),
-              BuildBtmItemArea(
-                data: data,
-                radiusValue: 30,
-              ),
+              // BuildBtmItemArea(
+              //   data: data,
+              //   radiusValue: 30,
+              // ),
             ],
           ),
         ),

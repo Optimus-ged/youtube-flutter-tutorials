@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'business_logic/cubits/posts/posts_cubits.dart';
 import 'presentation/views/posts/posts_view.dart';
 
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: "Poppins",
+          highlightColor: Colors.black,
           useMaterial3: true,
         ),
         home: const PostsView(),

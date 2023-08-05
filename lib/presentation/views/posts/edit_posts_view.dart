@@ -1,7 +1,38 @@
 import 'package:flutter/material.dart';
+import '../../../data/models/posts_models.dart';
+import '../../shared_widgets/custom_btn_widget.dart';
 
-class EditPostsView extends StatelessWidget {
-  const EditPostsView({super.key});
+class EditPostsView extends StatefulWidget {
+  final PostData? data;
+  const EditPostsView({this.data, super.key});
+
+  @override
+  State<EditPostsView> createState() => _EditPostsViewState();
+}
+
+class _EditPostsViewState extends State<EditPostsView> {
+  initializeFields(PostData data) {
+    titleController.text = "${data.title}";
+    bodyController.text = "${data.body}";
+  }
+
+  final titleController = TextEditingController();
+  final bodyController = TextEditingController();
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    bodyController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    if (widget.data != null) {
+      initializeFields(widget.data!);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +49,9 @@ class EditPostsView extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.close,
+                  color: Colors.amber[800],
                 ),
               ),
             ),
@@ -32,6 +64,8 @@ class EditPostsView extends StatelessWidget {
                   child: Column(
                     children: [
                       TextFormField(
+                        controller: titleController,
+                        cursorColor: Colors.amber,
                         style: const TextStyle(
                           fontSize: 40,
                         ),
@@ -41,52 +75,21 @@ class EditPostsView extends StatelessWidget {
                       ),
                       const Divider(),
                       TextFormField(
-                        // style: const TextStyle(
-                        //   fontSize: 1,
-                        // ),
+                        controller: bodyController,
+                        cursorColor: Colors.amber,
                         maxLines: 10,
                         minLines: 1,
                         decoration: const InputDecoration.collapsed(
-                          hintText: "Descrition",
+                          hintText: "Body",
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: SizedBox(
-                  width: double.maxFinite,
-                  height: 60,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      shape: MaterialStatePropertyAll(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      backgroundColor: const MaterialStatePropertyAll(
-                        Colors.amber,
-                      ),
-                      elevation: const MaterialStatePropertyAll(0),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 20,
-                      ),
-                      child: Text(
-                        "Save post",
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+              const Padding(
+                padding: EdgeInsets.all(20),
+                child: CustomButtonWidget(),
               )
             ],
           ),
