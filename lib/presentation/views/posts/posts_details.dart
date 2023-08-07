@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../data/models/posts_models.dart';
 import '../../shared_widgets/item_bottom_area_widget.dart';
 

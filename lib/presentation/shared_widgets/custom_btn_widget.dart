@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:landing_and_login_screen/data/models/posts_models.dart';
+import '../../data/models/posts_models.dart';
 
 class CustomButtonWidget extends StatelessWidget {
   final PostData? data;

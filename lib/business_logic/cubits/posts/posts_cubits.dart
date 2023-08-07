@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import '../../../data/models/posts_models.dart';
 
+import '../../../data/models/posts_models.dart';
 import '../../../data/repositories/posts_repositories.dart';
 import '../../custom_states.dart';
 import 'posts_states.dart';

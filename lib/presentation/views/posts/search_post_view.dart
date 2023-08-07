@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:landing_and_login_screen/presentation/views/posts/edit_posts_view.dart';
+import 'edit_posts_view.dart';
 import '../../../business_logic/cubits/posts/posts_cubits.dart';
 
 class SearchPostView extends StatelessWidget {
@@ -67,10 +67,11 @@ class SearchPostView extends StatelessWidget {
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => EditPostsView(
-                            data: context
-                                .watch<PostsCubit>()
-                                .state
-                                .searchedPostsList![index]),
+                          data: context
+                              .watch<PostsCubit>()
+                              .state
+                              .searchedPostsList![index],
+                        ),
                       ),
                     ),
                     child: Container(

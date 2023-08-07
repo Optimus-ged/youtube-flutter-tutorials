@@ -1,4 +1,4 @@
-import 'package:landing_and_login_screen/data/models/posts_models.dart';
+import '../models/posts_models.dart';
 
 import '../services/dio_services.dart';
 

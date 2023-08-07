@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:landing_and_login_screen/business_logic/cubits/posts/posts_cubits.dart';
-import 'package:landing_and_login_screen/business_logic/cubits/posts/posts_states.dart';
-import 'package:landing_and_login_screen/business_logic/custom_states.dart';
+import '../../business_logic/cubits/posts/posts_cubits.dart';
+import '../../business_logic/cubits/posts/posts_states.dart';
+import '../../business_logic/custom_states.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   final VoidCallback? onTapDelete;
