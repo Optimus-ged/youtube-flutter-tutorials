@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../business_logic/cubits/posts/posts_cubits.dart';
+import '../../../data/models/posts_models.dart';
 
-class SearchPostView extends StatelessWidget {
-  const SearchPostView({super.key});
+class SearchPostView extends StatefulWidget {
+  final List<PostData> posts;
+  const SearchPostView({required this.posts, super.key});
+
+  @override
+  State<SearchPostView> createState() => _SearchPostViewState();
+}
+
+class _SearchPostViewState extends State<SearchPostView> {
+  
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +54,9 @@ class SearchPostView extends StatelessWidget {
                           focusedBorder: buildOutLineBorder(),
                           enabledBorder: buildOutLineBorder(),
                         ),
+                        onChanged: (value) {
+                          context.read<PostsCubit>().filterPosts(value);
+                        },
                       ),
                     ),
                   ),
@@ -52,8 +68,10 @@ class SearchPostView extends StatelessWidget {
                     vertical: 10,
                     horizontal: 20,
                   ),
-                  itemCount: 5,
-                  itemBuilder: (context, index) => const Text("data"),
+                  itemCount: context.watch<PostsCubit>().state.searchedPostsList!.length,
+                  itemBuilder: (context, index) => Text(
+                    "${context.watch<PostsCubit>().state.searchedPostsList![index].title}",
+                  ),
                 ),
               )
             ],

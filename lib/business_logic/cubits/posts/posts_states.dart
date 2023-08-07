@@ -7,12 +7,14 @@ import '../../custom_states.dart';
 class PostsState extends Equatable {
   final CustomAppStates? state;
   final List<PostData>? postsData;
+  final List<PostData>? searchedPostsList;
   final PostData? postData;
   final String? errorMessage;
 
   const PostsState({
     @required this.state,
     @required this.postsData,
+    @required this.searchedPostsList,
     @required this.postData,
     @required this.errorMessage,
   });
@@ -20,12 +22,15 @@ class PostsState extends Equatable {
   PostsState copyWith({
     CustomAppStates? state,
     List<PostData>? postsData,
+    // variable for searching posts
+    List<PostData>? searchedPostsList,
     PostData? postData,
     String? errorMessage,
   }) {
     return PostsState(
       state: state ?? this.state,
       postsData: postsData ?? this.postsData,
+      searchedPostsList: searchedPostsList ?? this.searchedPostsList,
       postData: postData ?? this.postData,
       errorMessage: errorMessage ?? this.errorMessage,
     );
@@ -37,5 +42,6 @@ class PostsState extends Equatable {
         postsData,
         postData,
         errorMessage,
+        searchedPostsList,
       ];
 }

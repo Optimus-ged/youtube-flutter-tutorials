@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:landing_and_login_screen/data/models/posts_models.dart';
+import '../../../data/models/posts_models.dart';
 
 import '../../../data/repositories/posts_repositories.dart';
 import '../../custom_states.dart';
@@ -12,6 +12,7 @@ class PostsCubit extends Cubit<PostsState> {
           const PostsState(
             state: CustomAppStates.initial,
             postsData: [],
+            searchedPostsList: [],
             errorMessage: "",
             postData: null,
           ),
@@ -30,6 +31,7 @@ class PostsCubit extends Cubit<PostsState> {
           state.copyWith(
             state: CustomAppStates.success,
             postsData: result,
+            searchedPostsList: result.take(5).toList(),
           ),
         );
       }
@@ -141,6 +143,30 @@ class PostsCubit extends Cubit<PostsState> {
         state.copyWith(
           state: CustomAppStates.error,
           errorMessage: "Server error",
+        ),
+      );
+    }
+  }
+
+  void filterPosts(String value) {
+    if (state.postsData!.isNotEmpty) {
+      List<PostData> result = [];
+      result = state.searchedPostsList!;
+      if (value.isNotEmpty) {
+        result = state.postsData!
+            .where(
+              (e) => e.title!.toLowerCase().contains(
+                    value.toLowerCase(),
+                  ),
+            )
+            .toList();
+      }
+
+      // searchedPostsList.clear();
+      // searchedPostsList.addAll(result);
+      emit(
+        state.copyWith(
+          searchedPostsList: result,
         ),
       );
     }
