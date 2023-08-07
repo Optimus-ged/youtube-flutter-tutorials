@@ -31,7 +31,7 @@ class PostsCubit extends Cubit<PostsState> {
           state.copyWith(
             state: CustomAppStates.success,
             postsData: result,
-            searchedPostsList: result.take(5).toList(),
+            searchedPostsList: result,
           ),
         );
       }
@@ -65,6 +65,7 @@ class PostsCubit extends Cubit<PostsState> {
             state: CustomAppStates.success,
             postData: result,
             postsData: updatedList,
+            searchedPostsList: updatedList,
           ),
         );
       }
@@ -101,6 +102,7 @@ class PostsCubit extends Cubit<PostsState> {
             state: CustomAppStates.success,
             postData: result,
             postsData: updatedList,
+            searchedPostsList: updatedList,
           ),
         );
       }
@@ -134,6 +136,7 @@ class PostsCubit extends Cubit<PostsState> {
           state: CustomAppStates.success,
           postData: result,
           postsData: updatedList,
+          searchedPostsList: updatedList,
         ),
       );
     } catch (error, stacktrace) {
@@ -162,8 +165,6 @@ class PostsCubit extends Cubit<PostsState> {
             .toList();
       }
 
-      // searchedPostsList.clear();
-      // searchedPostsList.addAll(result);
       emit(
         state.copyWith(
           searchedPostsList: result,
