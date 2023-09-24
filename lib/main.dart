@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'business_logic/cubits/posts/posts_cubits.dart';
-import 'presentation/views/posts/posts_view.dart';
+import 'package:landing_and_login_screen/presentation/posts/posts_view.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,26 +11,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
+        statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarColor: Colors.grey.shade100,
-        systemNavigationBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.dark
       ),
     );
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => PostsCubit()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: "Poppins",
-          highlightColor: Colors.black,
-          useMaterial3: true,
-        ),
-        home: const PostsView(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: "Poppins",
+        highlightColor: Colors.black,
+        useMaterial3: true,
+        scaffoldBackgroundColor: Colors.white,
       ),
+      home: const PostsView(),
     );
   }
 }

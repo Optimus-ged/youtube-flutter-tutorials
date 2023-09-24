@@ -1,4 +1,4 @@
-package com.example.landing_and_login_screen
+package com.example.posts_app
 
 import io.flutter.embedding.android.FlutterActivity
 
