@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:landing_and_login_screen/data/models/post_data_model.dart';
+import 'package:landing_and_login_screen/presentation/posts/edit_posts_view.dart';
 import 'package:landing_and_login_screen/presentation/shared_widgets/custom_alert_dialog_widget.dart';
 
 class BuildBottomArea extends StatelessWidget {
-  const BuildBottomArea({super.key});
+  final PostDataModel data;
+  const BuildBottomArea({required this.data, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        customButton(icon: Icons.edit),
+        customButton(
+          icon: Icons.edit,
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => EditPostsView(
+                data: data,
+              ),
+            ));
+          },
+        ),
         customButton(
           icon: Icons.delete,
           onTap: () => showDialog(
             context: context,
-            builder: (context) => const CustomAlertDialogWidget(),
+            builder: (context) => CustomAlertDialogWidget(data: data),
           ),
         ),
       ],

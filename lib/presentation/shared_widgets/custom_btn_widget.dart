@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class CustomButtonWidget extends StatelessWidget {
   final VoidCallback? onTap;
-  const CustomButtonWidget({this.onTap, super.key});
+  final bool isLoading;
+  const CustomButtonWidget({this.onTap, required this.isLoading, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,19 +13,19 @@ class CustomButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: ButtonStyle(
-          shape: MaterialStatePropertyAll(
+          shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          backgroundColor: MaterialStatePropertyAll(
+          backgroundColor: WidgetStatePropertyAll(
             Colors.amber[800],
           ),
-          elevation: const MaterialStatePropertyAll(0),
+          elevation: const WidgetStatePropertyAll(0),
         ),
-        child: const Text(
-          "Save post",
-          style: TextStyle(
+        child: Text(
+          isLoading ? "Loading..." : "Save post",
+          style: const TextStyle(
             fontSize: 20,
             color: Colors.black,
             fontWeight: FontWeight.bold,

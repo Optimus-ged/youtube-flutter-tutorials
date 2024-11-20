@@ -40,4 +40,29 @@ class PostsDataCubit extends Cubit<PostDataState> {
       );
     }
   }
+
+  void addPost(PostDataModel data) {
+    final updatedList = state.data!.toList();
+    updatedList.insert(0, data);
+
+    emit(state.copyWith(data: updatedList));
+  }
+
+  void updatePost(PostDataModel data) {
+    final updatedList = state.data!.toList();
+    final index = updatedList.indexOf(
+      updatedList.where((e) => e.id == data.id).first
+    );
+    updatedList[index] = data;
+
+    emit(state.copyWith(data: updatedList));
+  }
+
+  void deletePost(PostDataModel data){
+    final updatedList = state.data!.toList();
+    updatedList.removeWhere((e) => e.id == data.id);
+
+    emit(state.copyWith(data: updatedList));
+
+  }
 }

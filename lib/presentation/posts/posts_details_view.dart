@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:landing_and_login_screen/data/models/post_data_model.dart';
 import 'package:landing_and_login_screen/presentation/shared_widgets/build_bottom_area.dart';
 
 class PostsDetailsView extends StatelessWidget {
-  const PostsDetailsView({super.key});
+  final PostDataModel data;
+  const PostsDetailsView({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -13,47 +15,54 @@ class PostsDetailsView extends StatelessWidget {
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(60),
             child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 10,
+              padding: const EdgeInsets.only(
+                left: 5,
+                right: 20,
+                top: 10,
+                bottom: 10,
               ),
               child: Row(
                 children: [
                   Row(
                     children: [
-                      Icon(
-                        Icons.arrow_back,
-                        color: Colors.amber[500],
+                      IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Colors.amber[500],
+                        ),
                       ),
                       CircleAvatar(
                         backgroundColor: Colors.amber[100],
                         radius: 20,
-                        child: const Text("A"),
+                        child: Text("${data.title?[0]}"),
                       )
                     ],
                   ),
                   const SizedBox(width: 5),
-                  const Expanded(
+                  Expanded(
                     child: Text(
-                      "This is a youtube tutorial",
+                      "${data.title}",
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 12),
+                      style: const TextStyle(fontSize: 12),
                     ),
                   )
                 ],
               ),
             ),
           ),
-          body: const Column(
+          body: Column(
             children: [
               // post body section
               Expanded(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Text(
-                    "This is a youtube tutorial This is a youtube tutorial This is a youtube tutorial This is a youtube tutorial This is a youtube tutorial This is a youtube tutorial",
-                    style: TextStyle(
+                    "${data.body}",
+                    style: const TextStyle(
                       fontSize: 20,
                     ),
                   ),
@@ -61,7 +70,7 @@ class PostsDetailsView extends StatelessWidget {
               ),
 
               // buttons section
-              BuildBottomArea()
+               BuildBottomArea(data: data,)
             ],
           ),
         ),

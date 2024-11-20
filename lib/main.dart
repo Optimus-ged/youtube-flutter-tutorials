@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:landing_and_login_screen/business_logic/cubits/create_posts/create_posts_cubit.dart';
+import 'package:landing_and_login_screen/business_logic/cubits/delete_post/delete_posts_data_cubit.dart';
 import 'package:landing_and_login_screen/business_logic/cubits/post_data/posts_data_cubit.dart';
+import 'package:landing_and_login_screen/business_logic/cubits/update_post/posts_data_cubit.dart';
 import 'package:landing_and_login_screen/presentation/posts/posts_view.dart';
 
 void main() => runApp(const MyApp());
@@ -20,18 +23,22 @@ class MyApp extends StatelessWidget {
           systemNavigationBarIconBrightness: Brightness.dark),
     );
     return MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => PostsDataCubit()),
-        ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            fontFamily: "Poppins",
-            highlightColor: Colors.black,
-            useMaterial3: true,
-            scaffoldBackgroundColor: Colors.white,
-          ),
-          home: const PostsView(),
-        ));
+      providers: [
+        BlocProvider(create: (context) => PostsDataCubit()),
+        BlocProvider(create: (context) => CreatePostsDataCubit()),
+        BlocProvider(create: (context) => UpdatePostsDataCubit()),
+        BlocProvider(create: (context) => DeletePostsDataCubit()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: "Poppins",
+          highlightColor: Colors.black,
+          useMaterial3: true,
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        home: const PostsView(),
+      ),
+    );
   }
 }

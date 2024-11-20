@@ -138,7 +138,9 @@ class _PostsViewState extends State<PostsView> {
   buildPostItem(BuildContext context, {required PostDataModel data}) {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const PostsDetailsView(),
+        builder: (context) =>  PostsDetailsView(
+          data: data,
+        ),
       )),
       child: Padding(
         padding: const EdgeInsets.only(bottom: 10),
